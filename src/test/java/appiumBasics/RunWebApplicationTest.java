@@ -66,7 +66,7 @@ public class RunWebApplicationTest {
     public void servicePage() {
         servicesPage.clickService();
         servicesPage.clickVehicleLicensing();
-      //  servicesPage.clickVehicleTSReport();
+      // servicesPage.clickVehicleTSReport();
         servicesPage.clickVehicleInstAppointment();
         servicesPage.clickBookAppointment();
     }
@@ -117,7 +117,7 @@ public class RunWebApplicationTest {
         paymentPage.clickPaySummary();
         paymentPage.clickPayMethod();
         paymentPage.selectMethod();
-        paymentPage.enterCardDetails("4111111111111111", "03", "27", "123");
+        paymentPage.enterCardDetails("4111111111111111", "12", "27", "123");
         paymentPage.confirmPay();
     }
    */
@@ -132,8 +132,16 @@ public class RunWebApplicationTest {
 
 // //  صفحه الكولات
 
+//  adb pair 172.20.10.3:43199 adb connect 172.20.10.3:38483    //
+
+
 // POM + TestNG best practice لمشروع Appium with Selenium //
 
-// 1- Technical vehicle statues report service //
-// 2- Book inspection appointment service //
+// 1- Technical vehicle statues report service // As A Login
+// 2- Book inspection appointment service // As A Login
+// 3- Vehicle License Renew // As A Login
+// 4- Profile ( Login , Guest , UAE Pass ) //
+
+
+
 

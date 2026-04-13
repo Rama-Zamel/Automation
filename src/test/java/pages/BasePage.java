@@ -10,14 +10,17 @@ import java.time.Duration;
 
 public class BasePage {
 
+    // attributes //
     protected AndroidDriver driver;
     protected WebDriverWait wait;
 
+    // constructor //
     public BasePage(AndroidDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(30));
     }
 
+    // method //
     protected void click(By locator) {
         wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
     }

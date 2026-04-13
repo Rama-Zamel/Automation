@@ -23,6 +23,13 @@ public class VehicleSelectionPage extends BasePage {
     }
 }
 
-// final or private what is deffer-net between this?
 
 
+
+
+
+
+
+// private => Access Modifier , inside the class only , no override , no inheritance
+
+// final  => Keyword , no override , no inheritance
