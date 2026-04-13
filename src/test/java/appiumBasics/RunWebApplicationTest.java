@@ -66,7 +66,7 @@ public class RunWebApplicationTest {
     public void servicePage() {
         servicesPage.clickService();
         servicesPage.clickVehicleLicensing();
-      // servicesPage.clickVehicleTSReport();
+      //  servicesPage.clickVehicleTSReport();
         servicesPage.clickVehicleInstAppointment();
         servicesPage.clickBookAppointment();
     }
