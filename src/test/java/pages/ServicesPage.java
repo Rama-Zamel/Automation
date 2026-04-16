@@ -10,6 +10,8 @@ public class ServicesPage extends BasePage {
     private By vehicleTSReportBtn = By.xpath("//android.widget.TextView[@text='Vehicle Technical Status Report']");
     private By VehicleInstAppointmentBtn = By.xpath("//android.widget.TextView[@text=\"Vehicle Inspection Appointment\"]");
     private By BookAppointmentBtn = By.xpath("//android.widget.TextView[@text=\"Book Appointment\"]");
+    private By VehicleLicenseRenewBtn = By.xpath("");
+
 
     public ServicesPage(AndroidDriver driver) {
         super(driver);
@@ -39,4 +41,10 @@ public class ServicesPage extends BasePage {
         click(BookAppointmentBtn);
         System.out.println("Book Appointment button clicked");
     }
+
+    public void clickVehicleLicenseRenew() {
+        click(VehicleLicenseRenewBtn);
+        System.out.println("Vehicle License Renew service clicked");
+    }
+
 }

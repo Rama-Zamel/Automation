@@ -69,6 +69,7 @@ public class RunWebApplicationTest {
       //  servicesPage.clickVehicleTSReport();
         servicesPage.clickVehicleInstAppointment();
         servicesPage.clickBookAppointment();
+
     }
 
     @Test(dependsOnMethods = "servicePage")
@@ -101,7 +102,7 @@ public class RunWebApplicationTest {
 
     @Test(dependsOnMethods = "inspectionSchedulePage")
         public void detailsPage() {
-           // detailsPage.clickSelectLanguage();
+           // detailsPage.clickSelectLanguage();';
             // detailsPage.chooseEnglishLanguage();
             detailsPage.clickContinue2();
         }
@@ -110,6 +111,8 @@ public class RunWebApplicationTest {
     public void confirmationWithoutPayment() {
         confirmationPage.clickDone();
     }
+
+
 
   /*  @Test(dependsOnMethods = "detailsPage")
     public void paymentPage() {
@@ -127,7 +130,119 @@ public class RunWebApplicationTest {
         confirmationPage.clickDone();
     }
     */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*    public void completeFlowLoginService() {
+
+        loginPage.clickAllowBtn();
+        loginPage.clickSkip();
+        loginPage.selectUAEResident();
+        loginPage.clickProceed();
+        loginPage.clickLogin();
+        loginPage.enterUsername("permit004");
+        loginPage.enterPassword("Test@1234");
+        loginPage.clickLoginButton();
+
+    }
+
+    public void completeFlowVehicleTSReportService() {
+        servicesPage.clickService();
+        servicesPage.clickVehicleLicensing()
+        servicesPage.clickVehicleTSReport();
+        vehicleSelectionPage.selectRegisteredVehicle();
+        vehicleSelectionPage.clickContinue();
+        detailsPage.clickSelectLanguage();';
+        detailsPage.chooseEnglishLanguage();
+        detailsPage.clickContinue2();
+    }
+
+    public void completeFlowInspectionService() {
+
+        servicesPage.clickService();
+        servicesPage.clickVehicleLicensing();
+        servicesPage.clickVehicleInstAppointment();
+        servicesPage.clickBookAppointment();
+
+        vehicleSelectionPage.selectRegisteredVehicle();
+        vehicleSelectionPage.clickContinue();
+
+        inspectionTypePage.serviceTypeInstDropDown();
+        inspectionTypePage.chooseServiceTypeInstDropDown("Registration Test");
+        inspectionTypePage.clickContinue();
+
+        inspectionCenterPage.searchInspectionCenter("Wasel Al Jaddaf");
+        inspectionCenterPage.selectInspectionCenter();
+
+        inspectionSchedulePage.inspectionDateDropDown();
+        inspectionSchedulePage.chooseInspectionDateDropDown("02-03-2026");
+        inspectionSchedulePage.inspectionTimeDropDown();
+        inspectionSchedulePage.chooseInspectionTimeDropDown("07:00 AM - 07:10 AM");
+        inspectionSchedulePage.clickContinue();
+
+        detailsPage.clickContinue2();
+    }
+
+    @Test
+    public void withoutPayment() {
+
+        completeFlowLoginService();
+        completeFlowInspectionService();
+        confirmationPage.clickDone();
+    }
+
+    @Test
+    public void withPayment() {
+
+        completeFlowLoginService();
+        completeFlowVehicleTSReportService()
+        paymentPage.acceptTerms();
+        paymentPage.clickPaySummary();
+        paymentPage.clickPayMethod();
+        paymentPage.selectMethod();
+        paymentPage.enterCardDetails("4111111111111111", "12", "27", "123");
+        paymentPage.confirmPay();
+        confirmationPage.clickDone();
+    }
+
+ */
+
+
 }
+
+
+
+
+
+
+
+
+
 
 
 // //  صفحه الكولات
