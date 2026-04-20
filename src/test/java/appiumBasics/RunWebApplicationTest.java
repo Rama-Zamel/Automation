@@ -233,6 +233,8 @@ public class RunWebApplicationTest {
  */
 
 
+
+
 }
 
 
@@ -250,7 +252,12 @@ public class RunWebApplicationTest {
 //  adb pair 172.20.10.3:43199 adb connect 172.20.10.3:38483    //
 
 
-// POM + TestNG best practice لمشروع Appium with Selenium //
+// CI/CD with maven  = نظام بيشتغل عنك التست أوتوماتيك عن طريق استخدام ال جيت هب   // =>
+// selenium web need (CI/CD)
+// appium need (cloud)
+
+
+//  Maven + POM + TestNG best practice لمشروع Appium with Selenium //
 
 // 1- Technical vehicle statues report service // As A Login
 // 2- Book inspection appointment service // As A Login
