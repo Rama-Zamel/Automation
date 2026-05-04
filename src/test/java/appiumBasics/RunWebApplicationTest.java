@@ -21,6 +21,7 @@ public class RunWebApplicationTest {
     private InspectionSchedulePage inspectionSchedulePage;
     private DetailsPage detailsPage;
     private ConfirmationPage confirmationPage;
+    private NolTagIDPage nolTagIDPage;
 
     @BeforeClass
     public void setUp() throws Exception {
@@ -31,7 +32,7 @@ public class RunWebApplicationTest {
                 .setAppPackage("com.rta.rtadubai")
                 .setAppActivity("com.rta.rtadubai.MainActivity")
                 .setEnsureWebviewsHavePages(true)
-                .setNoReset(true)
+                .setNoReset(false)
                 .setFullReset(false);
 
         driver = new AndroidDriver(new URL("http://127.0.0.1:4723"), options);
@@ -48,6 +49,7 @@ public class RunWebApplicationTest {
         inspectionSchedulePage = new InspectionSchedulePage(driver);
         detailsPage = new DetailsPage(driver);
         confirmationPage = new ConfirmationPage(driver);
+        nolTagIDPage = new NolTagIDPage(driver);
     }
 
     @Test
@@ -57,22 +59,35 @@ public class RunWebApplicationTest {
         loginPage.selectUAEResident();
         loginPage.clickProceed();
         loginPage.clickLogin();
-        loginPage.enterUsername("permit004");
-        loginPage.enterPassword("Test@1234");
+        loginPage.enterUsername("Ramazamel");
+        loginPage.enterPassword("R@hz?8KTDT8");
         loginPage.clickLoginButton();
+        // loginPage.clickGuestButton();
     }
 
     @Test(dependsOnMethods = "loginPage")
     public void servicePage() {
         servicesPage.clickService();
-        servicesPage.clickVehicleLicensing();
-      //  servicesPage.clickVehicleTSReport();
-        servicesPage.clickVehicleInstAppointment();
-        servicesPage.clickBookAppointment();
-
+        // servicesPage.clickVehicleLicensing();
+        //  servicesPage.clickVehicleTSReport();
+        // servicesPage.clickVehicleInstAppointment();
+        // servicesPage.clickBookAppointment();
+        servicesPage.clickNOL();
+        // servicesPage.clickNolBalance();
+        servicesPage.clickNolTopUp();
     }
 
     @Test(dependsOnMethods = "servicePage")
+    public void nolTagIDPage() {
+        nolTagIDPage.nolTagID("0361532922");
+        // nolTagIDPage.cardInfo();
+        nolTagIDPage.selectAmount();
+        // nolTagIDPage.emailAddress("e@gmail.com");  just as Guest
+        nolTagIDPage.topUp();
+
+    }
+
+    /* @Test(dependsOnMethods = "servicePage")
     public void vehicleSelectionPage() {
         vehicleSelectionPage.selectRegisteredVehicle();
         vehicleSelectionPage.clickContinue();
@@ -111,6 +126,8 @@ public class RunWebApplicationTest {
     public void confirmationWithoutPayment() {
         confirmationPage.clickDone();
     }
+
+     */
 
 
 
@@ -233,18 +250,7 @@ public class RunWebApplicationTest {
  */
 
 
-
-
 }
-
-
-
-
-
-
-
-
-
 
 
 // //  صفحه الكولات

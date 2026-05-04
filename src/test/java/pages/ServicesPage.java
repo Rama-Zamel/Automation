@@ -11,6 +11,10 @@ public class ServicesPage extends BasePage {
     private By VehicleInstAppointmentBtn = By.xpath("//android.widget.TextView[@text=\"Vehicle Inspection Appointment\"]");
     private By BookAppointmentBtn = By.xpath("//android.widget.TextView[@text=\"Book Appointment\"]");
     private By VehicleLicenseRenewBtn = By.xpath("");
+    private By NOLBtn = By.xpath("//android.widget.TextView[@text=\"nol\"]");
+    private By NolBalanceBtn = By.xpath("//android.widget.TextView[@text=\"Check your nol balance\"]");
+    private By NolTopUpBtn = By.xpath("//android.widget.TextView[@text=\"Top up nol card\"]");
+
 
 
     public ServicesPage(AndroidDriver driver) {
@@ -45,6 +49,20 @@ public class ServicesPage extends BasePage {
     public void clickVehicleLicenseRenew() {
         click(VehicleLicenseRenewBtn);
         System.out.println("Vehicle License Renew service clicked");
+    }
+    public void clickNOL() {
+        click(NOLBtn);
+        System.out.println("NOL Service clicked");
+    }
+
+    public void clickNolBalance() {
+        click(NolBalanceBtn);
+        System.out.println("NOL Balance clicked");
+    }
+
+    public void clickNolTopUp() {
+        click(NolTopUpBtn);
+        System.out.println("NOL TopUp clicked");
     }
 
 }

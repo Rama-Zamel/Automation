@@ -14,6 +14,7 @@ public class LoginPage extends BasePage {
     private By usernameTxt = By.xpath("//android.widget.ScrollView//android.widget.EditText[1]");
     private By passwordTxt = By.xpath("//android.widget.ScrollView//android.widget.EditText[2]");
     private By loginButton = By.xpath("//android.widget.TextView[@text='Login']");
+    private By GuestButton = By.xpath("//android.widget.TextView[@text=\"Continue as a guest\"]");
 
     public LoginPage(AndroidDriver driver) {
         super(driver);
@@ -57,5 +58,10 @@ public class LoginPage extends BasePage {
     public void clickLoginButton() {
         click(loginButton);
         System.out.println("Login Button clicked");
+    }
+
+    public void clickGuestButton() {
+        click(GuestButton);
+        System.out.println("Guest Button clicked");
     }
 }
