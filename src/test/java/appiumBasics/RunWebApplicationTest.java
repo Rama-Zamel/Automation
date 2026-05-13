@@ -22,11 +22,13 @@ public class RunWebApplicationTest {
     private DetailsPage detailsPage;
     private ConfirmationPage confirmationPage;
     private NolTagIDPage nolTagIDPage;
+    private MadinatiServicePage madinatiServicePage;
+    private MorePage morePage;
+    private RTALocationsPage rtalocationsPage;
 
     @BeforeClass
     public void setUp() throws Exception {
         UiAutomator2Options options = new UiAutomator2Options()
-                .setDeviceName("R58Y504S1HP")
                 .setPlatformName("Android")
                 .setAutomationName("UiAutomator2")
                 .setAppPackage("com.rta.rtadubai")
@@ -36,7 +38,6 @@ public class RunWebApplicationTest {
                 .setFullReset(false);
 
         driver = new AndroidDriver(new URL("http://127.0.0.1:4723"), options);
-
         Set<String> contexts = driver.getContextHandles();
         System.out.println("Contexts: " + contexts);
 
@@ -50,6 +51,10 @@ public class RunWebApplicationTest {
         detailsPage = new DetailsPage(driver);
         confirmationPage = new ConfirmationPage(driver);
         nolTagIDPage = new NolTagIDPage(driver);
+        madinatiServicePage = new MadinatiServicePage(driver);
+        morePage = new MorePage(driver);
+        rtalocationsPage = new RTALocationsPage(driver);
+
     }
 
     @Test
@@ -59,31 +64,53 @@ public class RunWebApplicationTest {
         loginPage.selectUAEResident();
         loginPage.clickProceed();
         loginPage.clickLogin();
-        loginPage.enterUsername("Ramazamel");
-        loginPage.enterPassword("R@hz?8KTDT8");
-        loginPage.clickLoginButton();
-        // loginPage.clickGuestButton();
+        // loginPage.enterUsername("Tariqj86");
+        // loginPage.enterPassword("Test@1986");
+        // loginPage.clickLoginButton();
+        loginPage.clickGuestButton();
+        // loginPage.clickUAEPASSButton();
+        // loginPage.UAEPASSUserName("");
     }
+
 
     @Test(dependsOnMethods = "loginPage")
     public void servicePage() {
-        servicesPage.clickService();
+        // servicesPage.clickService();
         // servicesPage.clickVehicleLicensing();
-        //  servicesPage.clickVehicleTSReport();
+        // servicesPage.clickVehicleTSReport();
         // servicesPage.clickVehicleInstAppointment();
         // servicesPage.clickBookAppointment();
-        servicesPage.clickNOL();
+        //servicesPage.clickNOL();
         // servicesPage.clickNolBalance();
-        servicesPage.clickNolTopUp();
+        // servicesPage.clickNolTopUp();
+        // servicesPage.clickParking();
+        // servicesPage.clickTopUpParking();
     }
 
-    @Test(dependsOnMethods = "servicePage")
-    public void nolTagIDPage() {
-        nolTagIDPage.nolTagID("0361532922");
-        // nolTagIDPage.cardInfo();
-        nolTagIDPage.selectAmount();
-        // nolTagIDPage.emailAddress("e@gmail.com");  just as Guest
-        nolTagIDPage.topUp();
+    @Test(dependsOnMethods = "loginPage")
+    public void madinatiServicePage() {
+        // madinatiServicePage.madinatiService();
+        // madinatiServicePage.MadinatiMap();
+    }
+
+    @Test(dependsOnMethods = "loginPage")
+    public void MorePage() {
+        morePage.ClickMore();
+        morePage.ClickRTALocations();
+    }
+
+    @Test(dependsOnMethods = "MorePage")
+    public void RTALocationsPage() {
+        rtalocationsPage.RTALocationsWithScroll();
+    }
+
+     @Test(dependsOnMethods = "servicePage")
+     public void nolTagIDPage() {
+         // nolTagIDPage.nolTagID("0361532922");
+         // nolTagIDPage.cardInfo();
+         // nolTagIDPage.selectAmount();
+         // nolTagIDPage.emailAddress("e@gmail.com");  // just as Guest
+         // nolTagIDPage.topUp();
 
     }
 
@@ -126,31 +153,27 @@ public class RunWebApplicationTest {
     public void confirmationWithoutPayment() {
         confirmationPage.clickDone();
     }
-
+detailsPage
      */
 
 
 
-  /*  @Test(dependsOnMethods = "detailsPage")
+   @Test(dependsOnMethods = "nolTagIDPage")
     public void paymentPage() {
-        paymentPage.acceptTerms();
-        paymentPage.clickPaySummary();
-        paymentPage.clickPayMethod();
-        paymentPage.selectMethod();
-        paymentPage.enterCardDetails("4111111111111111", "12", "27", "123");
-        paymentPage.confirmPay();
+       // paymentPage.acceptTerms();
+       // paymentPage.clickPaySummary();
+       // paymentPage.clickPayMethod();
+       // paymentPage.selectMethod();
+       // paymentPage.enterCardDetails("4111111111111111", "12", "27", "123");
+       // paymentPage.confirmPay();
     }
-   */
+
 
    /*  @Test(dependsOnMethods = "paymentPage")
     public void confirmationAfterPayment() {
         confirmationPage.clickDone();
     }
     */
-
-
-
-
 
 
 
@@ -188,9 +211,20 @@ public class RunWebApplicationTest {
 
     }
 
+    public void completeGuestService() {
+
+        loginPage.clickAllowBtn();
+        loginPage.clickSkip();
+        loginPage.selectUAEResident();
+        loginPage.clickProceed();
+        loginPage.clickLogin();
+        loginPage.clickGuestButton();
+
+    }
+
     public void completeFlowVehicleTSReportService() {
         servicesPage.clickService();
-        servicesPage.clickVehicleLicensing()
+        servicesPage.clickVehicleLicensing();
         servicesPage.clickVehicleTSReport();
         vehicleSelectionPage.selectRegisteredVehicle();
         vehicleSelectionPage.clickContinue();
@@ -225,19 +259,59 @@ public class RunWebApplicationTest {
         detailsPage.clickContinue2();
     }
 
+    public void completeFlowTopUpParkingAccountService() {
+
+        servicesPage.clickService();
+        servicesPage.clickParking();
+        servicesPage.clickTopUpParking();
+        nolTagIDPage.selectAmount();
+    }
+
+    public void completeFlowNolTopUpService() {
+        servicesPage.clickService();
+        servicesPage.clickNOL();
+        servicesPage.clickNolTopUp();
+        nolTagIDPage.nolTagID("0361532922");
+        nolTagIDPage.selectAmount();
+        nolTagIDPage.emailAddress("e@gmail.com");  // just as Guest
+        nolTagIDPage.topUp();
+    }
+
+    public void completeFlowNolBalanceService() {
+        servicesPage.clickService();
+        servicesPage.clickNOL();
+        servicesPage.clickNolBalance();
+        nolTagIDPage.nolTagID("0361532922");
+        nolTagIDPage.cardInfo();
+        nolTagIDPage.topUp();
+        nolTagIDPage.selectAmount();
+        nolTagIDPage.topUp();
+    }
+
+    public void completeFlowMadinatiService() {
+       madinatiServicePage.madinatiService();
+       madinatiServicePage.MadinatiMap();
+    }
+
+
+
     @Test
     public void withoutPayment() {
 
         completeFlowLoginService();
         completeFlowInspectionService();
         confirmationPage.clickDone();
+        completeFlowNolBalanceService();
+        completeFlowMadinatiService();
     }
 
     @Test
     public void withPayment() {
 
         completeFlowLoginService();
-        completeFlowVehicleTSReportService()
+        completeFlowVehicleTSReportService();
+        completeFlowTopUpParkingAccountService();
+        completeFlowNolTopUpService();
         paymentPage.acceptTerms();
         paymentPage.clickPaySummary();
         paymentPage.clickPayMethod();
@@ -267,8 +341,18 @@ public class RunWebApplicationTest {
 
 // 1- Technical vehicle statues report service // As A Login
 // 2- Book inspection appointment service // As A Login
-// 3- Vehicle License Renew // As A Login
+// 3- Vehicle License Renew // As A Login *
 // 4- Profile ( Login , Guest , UAE Pass ) //
+// 5- Nol Section // As A Login & As A Guest
+// 6- Madinati Service// As A Login & As A Guest
+// 7- Top Up Parking Account Service// As A Login
+// 8- RTA Location Service// As A Login & As A Guest
+
+
+
+
+
+
 
 
 

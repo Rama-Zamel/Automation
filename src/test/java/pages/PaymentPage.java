@@ -1,12 +1,13 @@
 package pages;
 
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
 
 public class PaymentPage extends BasePage {
 
     private By termsCheckbox = By.xpath("//android.widget.CheckBox");
-    private By paySummary = By.xpath("//android.widget.TextView[@text='Pay']");
+    private By paySummary = AppiumBy.androidUIAutomator("new UiSelector().textContains(\"Pay\")");
     private By payMethod = By.xpath("//android.widget.TextView[@text='Pay']");
     private By sMethodBtn = By.xpath("//android.widget.Button[@resource-id='btnPay']");
     private By ibanTxt = By.xpath("//android.widget.EditText[@resource-id='txtCardNo']");

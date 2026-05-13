@@ -2,17 +2,21 @@ package pages;
 
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
 import java.time.Duration;
 
 public class BasePage {
 
     // attributes //
     protected AndroidDriver driver;
-    protected WebDriverWait wait;
+    protected WebDriverWait wait;;
 
     // constructor //
     public BasePage(AndroidDriver driver) {
@@ -36,6 +40,17 @@ public class BasePage {
 
     protected String getText(By locator) {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator)).getText();
+    }
+
+    public void takeScreenshot() throws Exception {
+
+        File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+
+        File screen = new File( System.currentTimeMillis() + ".png");
+
+        FileHandler.copy(src, screen);
+
+        System.out.println("Screenshot taken: " + screen.getName());
     }
 }
 

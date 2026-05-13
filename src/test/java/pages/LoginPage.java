@@ -1,5 +1,6 @@
 package pages;
 
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
 
@@ -15,6 +16,10 @@ public class LoginPage extends BasePage {
     private By passwordTxt = By.xpath("//android.widget.ScrollView//android.widget.EditText[2]");
     private By loginButton = By.xpath("//android.widget.TextView[@text='Login']");
     private By GuestButton = By.xpath("//android.widget.TextView[@text=\"Continue as a guest\"]");
+    private By UAEPASSBtn = By.xpath("//android.widget.ImageView[@content-desc=\"Sign In With UAE PASS\"]");
+    private By UAEUserNameBtn = AppiumBy.androidUIAutomator("new UiSelector().resourceId(\"username\")");
+
+
 
     public LoginPage(AndroidDriver driver) {
         super(driver);
@@ -63,5 +68,15 @@ public class LoginPage extends BasePage {
     public void clickGuestButton() {
         click(GuestButton);
         System.out.println("Guest Button clicked");
+    }
+
+    public void clickUAEPASSButton() {
+        click(UAEPASSBtn);
+        System.out.println("UAEPASS Button clicked");
+    }
+
+    public void UAEPASSUserName(String UAEPassUserName) {
+        sendKeys(UAEUserNameBtn, UAEPassUserName);
+        System.out.println("UAEPASS UserName entered Done");
     }
 }

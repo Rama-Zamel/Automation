@@ -1,6 +1,7 @@
 package pages;
 
 import io.appium.java_client.android.AndroidDriver;
+
 import org.openqa.selenium.By;
 
 public class ServicesPage extends BasePage {
@@ -10,11 +11,12 @@ public class ServicesPage extends BasePage {
     private By vehicleTSReportBtn = By.xpath("//android.widget.TextView[@text='Vehicle Technical Status Report']");
     private By VehicleInstAppointmentBtn = By.xpath("//android.widget.TextView[@text=\"Vehicle Inspection Appointment\"]");
     private By BookAppointmentBtn = By.xpath("//android.widget.TextView[@text=\"Book Appointment\"]");
-    private By VehicleLicenseRenewBtn = By.xpath("");
+    private By VehicleLicenseRenewBtn =By.xpath("//android.widget.TextView[@text=\"Vehicle License Renewal\"]");
     private By NOLBtn = By.xpath("//android.widget.TextView[@text=\"nol\"]");
     private By NolBalanceBtn = By.xpath("//android.widget.TextView[@text=\"Check your nol balance\"]");
     private By NolTopUpBtn = By.xpath("//android.widget.TextView[@text=\"Top up nol card\"]");
-
+    private By ParkingBtn = By.xpath("//android.widget.TextView[@text=\"Parking\"] ");
+    private By TopUpParkingBtn = By.xpath(" //android.widget.TextView[@text=\"Top up parking account\"]");
 
 
     public ServicesPage(AndroidDriver driver) {
@@ -64,5 +66,17 @@ public class ServicesPage extends BasePage {
         click(NolTopUpBtn);
         System.out.println("NOL TopUp clicked");
     }
+
+    public void clickParking() {
+        click(ParkingBtn);
+        System.out.println("Parking Service clicked");
+    }
+
+    public void clickTopUpParking() {
+        click(TopUpParkingBtn);
+        System.out.println("Top Up Parking Account service clicked");
+    }
+
+
 
 }
