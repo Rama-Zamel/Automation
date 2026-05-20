@@ -39,10 +39,9 @@ public class RTALocationsPage extends BasePage {
                     System.out.println("\n--- Searching for: " + tab + " ---");
 
                     click(AppiumBy.androidUIAutomator(ScrollBtn + ".scrollIntoView(new UiSelector().textContains(\"" + tab + "\"))"));
-                    takeScreenshot();
 
                     System.out.println("✓ Clicked: " + tab);
-                    Thread.sleep(2000);
+                    Thread.sleep(7000);
 
                 } catch (Exception e) {
                     System.err.println("❌ Failed to find: " + tab);
@@ -61,7 +60,7 @@ public class RTALocationsPage extends BasePage {
             System.out.println("\n✓ All tabs completed!");
             driver.pressKey(new KeyEvent(AndroidKey.BACK));
 
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

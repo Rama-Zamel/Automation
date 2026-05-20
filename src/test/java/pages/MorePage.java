@@ -6,10 +6,11 @@ import org.openqa.selenium.By;
 
 public class MorePage extends BasePage {
 
-    private By MoreBtn = AppiumBy.androidUIAutomator("new UiSelector().text(\"More\")");
+    private By MoreBtn = AppiumBy.androidUIAutomator("new UiSelector().description(\"More\")");
     private By RTAlocationsBtn = AppiumBy.androidUIAutomator("new UiSelector().text(\"RTA locations\")");
+    private By LogoutBtn = AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector().scrollable(true))" + ".scrollIntoView(new UiSelector().text(\"Logout\"))");
 
-        public MorePage(AndroidDriver driver) {
+    public MorePage(AndroidDriver driver) {
             super(driver);
 
         }
@@ -23,5 +24,10 @@ public class MorePage extends BasePage {
     public void ClickRTALocations() {
         click(RTAlocationsBtn);
         System.out.println("✓ RTA locations Button clicked");
+    }
+
+    public void ClickLogout() {
+        click(LogoutBtn);
+        System.out.println("✓ Logout Button clicked");
     }
 }

@@ -26,11 +26,11 @@ public class BasePage {
 
     // method //
     protected void click(By locator) {
-        wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(locator)).click();
     }
 
     protected void sendKeys(By locator, String text) {
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
+        WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
         element.click();          // لتفعيل focus
         element.clear();          // لتنظيف أي نص موجود
         element.sendKeys(text);   // أدخل النص
@@ -40,17 +40,6 @@ public class BasePage {
 
     protected String getText(By locator) {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator)).getText();
-    }
-
-    public void takeScreenshot() throws Exception {
-
-        File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-        File screen = new File( System.currentTimeMillis() + ".png");
-
-        FileHandler.copy(src, screen);
-
-        System.out.println("Screenshot taken: " + screen.getName());
     }
 }
 

@@ -9,7 +9,7 @@ public class NolTagIDPage extends BasePage {
     private By noltagidBtn = By.xpath("//android.widget.EditText");
     private By cardinfoBtn = By.xpath("//android.widget.TextView[@text=\"Check card info\"]");
     private By emailaddressBtn = AppiumBy.androidUIAutomator("new UiSelector().className(\"android.widget.EditText\").instance(1)");
-    private By selectamountBtn = By.xpath("//android.widget.TextView[@text=\"10\"]");
+    private By selectamountBtn = By.xpath("//android.widget.TextView[@text=\"50\"]");
     private By topupBtn = AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector().scrollable(true))" + ".scrollIntoView(new UiSelector().text(\"Top Up\"))");
 
     public NolTagIDPage(AndroidDriver driver) {

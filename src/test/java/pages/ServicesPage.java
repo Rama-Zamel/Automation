@@ -17,6 +17,10 @@ public class ServicesPage extends BasePage {
     private By NolTopUpBtn = By.xpath("//android.widget.TextView[@text=\"Top up nol card\"]");
     private By ParkingBtn = By.xpath("//android.widget.TextView[@text=\"Parking\"] ");
     private By TopUpParkingBtn = By.xpath(" //android.widget.TextView[@text=\"Top up parking account\"]");
+    private By SalikBtn = By.xpath("//android.widget.TextView[@text=\"Salik\"]");
+    private By RechargeMySalikBtn = By.xpath(" //android.widget.TextView[@text=\"Recharge my salik account\"]");
+    private By RechargeAnotherSalikBtn = By.xpath(" //android.widget.TextView[@text=\"Recharge another account\"]");
+
 
 
     public ServicesPage(AndroidDriver driver) {
@@ -75,6 +79,21 @@ public class ServicesPage extends BasePage {
     public void clickTopUpParking() {
         click(TopUpParkingBtn);
         System.out.println("Top Up Parking Account service clicked");
+    }
+
+    public void clickSalik() {
+        click(SalikBtn);
+        System.out.println("Salik Service clicked");
+    }
+
+    public void clickRechargeMySalik() {
+        click(RechargeMySalikBtn);
+        System.out.println("Recharge My Salik Account service clicked");
+    }
+
+    public void clickRechargeAnotherSalik() {
+        click(RechargeAnotherSalikBtn);
+        System.out.println("Recharge Another Salik Account service clicked");
     }
 
 

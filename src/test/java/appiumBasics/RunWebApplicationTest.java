@@ -2,10 +2,15 @@ package appiumBasics;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.io.FileHandler;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 import pages.*;
 
+import java.io.File;
 import java.net.URL;
 import java.util.Set;
 
@@ -25,6 +30,38 @@ public class RunWebApplicationTest {
     private MadinatiServicePage madinatiServicePage;
     private MorePage morePage;
     private RTALocationsPage rtalocationsPage;
+    private RechargeSalikPage  rechargeSalikPage;
+
+
+    @BeforeSuite
+    public void clearScreenshots() {
+
+        File folder = new File("screenshots");
+
+        if (folder.exists()) {
+
+            for (File file : folder.listFiles()) {
+                file.delete();
+            }
+        }
+
+        System.out.println("Old screenshots deleted");
+    }
+
+    public void takeScreenshot(String fileName) throws Exception {
+
+        File src = ((TakesScreenshot) driver)
+                .getScreenshotAs(OutputType.FILE);
+
+        File screen = new File(
+                "screenshots/" + fileName + ".png"
+        );
+
+        FileHandler.copy(src, screen);
+
+        System.out.println("Screenshot taken: "
+                + screen.getAbsolutePath());
+    }
 
     @BeforeClass
     public void setUp() throws Exception {
@@ -54,28 +91,37 @@ public class RunWebApplicationTest {
         madinatiServicePage = new MadinatiServicePage(driver);
         morePage = new MorePage(driver);
         rtalocationsPage = new RTALocationsPage(driver);
-
+        rechargeSalikPage = new RechargeSalikPage(driver);
     }
 
     @Test
-    public void loginPage() {
+    public void loginPage() throws Exception {
         loginPage.clickAllowBtn();
+        takeScreenshot("AllowBtn");
         loginPage.clickSkip();
+        takeScreenshot("SkipBtn");
         loginPage.selectUAEResident();
+        takeScreenshot("UAEResident");
         loginPage.clickProceed();
+        takeScreenshot("ProceedBtn");
         loginPage.clickLogin();
-        // loginPage.enterUsername("Tariqj86");
-        // loginPage.enterPassword("Test@1986");
-        // loginPage.clickLoginButton();
-        loginPage.clickGuestButton();
+        takeScreenshot( "LoginBtn");
+        loginPage.enterUsername("Tariqj86");
+        takeScreenshot("Username");
+        loginPage.enterPassword("Test@1986");
+        takeScreenshot("Password");
+        loginPage.clickLoginButton();
+        takeScreenshot( "LoginBtn");
+        // loginPage.clickGuestButton();
+        // takeScreenshot( "GuestBtn");
         // loginPage.clickUAEPASSButton();
         // loginPage.UAEPASSUserName("");
     }
 
-
     @Test(dependsOnMethods = "loginPage")
-    public void servicePage() {
-        // servicesPage.clickService();
+    public void servicePage() throws Exception {
+        servicesPage.clickService();
+        takeScreenshot("ServiceBtn");
         // servicesPage.clickVehicleLicensing();
         // servicesPage.clickVehicleTSReport();
         // servicesPage.clickVehicleInstAppointment();
@@ -85,32 +131,84 @@ public class RunWebApplicationTest {
         // servicesPage.clickNolTopUp();
         // servicesPage.clickParking();
         // servicesPage.clickTopUpParking();
+        servicesPage.clickSalik();;
+        takeScreenshot("Salik");
+        //  servicesPage.clickRechargeMySalik();
+        //  takeScreenshot("RechargeMySalik");
+        servicesPage.clickRechargeAnotherSalik();
+        takeScreenshot("RechargeAnotherSalik");
     }
 
-    @Test(dependsOnMethods = "loginPage")
+    @Test(dependsOnMethods = "servicePage")
+    public void RechargeSalikPage() throws Exception {
+
+        rechargeSalikPage.ClickMobileNumber("525285659");
+        rechargeSalikPage.ClickCountry();
+        rechargeSalikPage.SelectCountryDropDown("United Arab Emirates");
+        rechargeSalikPage.ClickEmirate();
+        rechargeSalikPage.SelectEmirateDropDown("Dubai");
+        rechargeSalikPage.ClickCategory();
+        rechargeSalikPage.SelectCategoryDropDown("Private");
+        rechargeSalikPage.ClickPlateCode();
+        rechargeSalikPage.SelectPlateDropDown("J");
+        rechargeSalikPage.ClickPlateNumber("96407");
+        rechargeSalikPage.SelectAmount();
+        takeScreenshot("RechargeSalikPage");
+        rechargeSalikPage.RechargeNow();
+        takeScreenshot("RechargeNow");
+    }
+
+
+    @Test(dependsOnMethods = "RechargeSalikPage")
+    public void paymentPage() throws Exception {
+        // paymentPage.acceptTerms();
+        //  paymentPage.clickPaySummary();
+        paymentPage.clickPayMethod();
+        takeScreenshot("PaymentPage");
+        // paymentPage.selectMethod();
+        // paymentPage.enterCardDetails("4111111111111111", "12", "27", "123");
+        // paymentPage.confirmPay();
+    }
+
+
+   /*  @Test(dependsOnMethods = "loginPage")
     public void madinatiServicePage() {
         // madinatiServicePage.madinatiService();
         // madinatiServicePage.MadinatiMap();
     }
 
-    @Test(dependsOnMethods = "loginPage")
-    public void MorePage() {
-        morePage.ClickMore();
+    */
+
+   /* @Test(dependsOnMethods = "loginPage")
+    public void MorePage() throws Exception {
+       morePage.ClickMore();
+        takeScreenshot( "MoreBtn");
+
         morePage.ClickRTALocations();
-    }
+        takeScreenshot( "RTALocations");
 
-    @Test(dependsOnMethods = "MorePage")
-    public void RTALocationsPage() {
-        rtalocationsPage.RTALocationsWithScroll();
+        morePage.ClickLogout();
+        takeScreenshot("LogoutBtn");
     }
+    */
 
-     @Test(dependsOnMethods = "servicePage")
+    /* @Test(dependsOnMethods = "MorePage")
+    public void RTALocationsPage() throws Exception {
+         rtalocationsPage.RTALocationsWithScroll();
+        takeScreenshot( "RTALocationsWithScroll");
+
+
+    }
+     */
+
+    /*  @Test(dependsOnMethods = "servicePage")
      public void nolTagIDPage() {
          // nolTagIDPage.nolTagID("0361532922");
          // nolTagIDPage.cardInfo();
          // nolTagIDPage.selectAmount();
          // nolTagIDPage.emailAddress("e@gmail.com");  // just as Guest
          // nolTagIDPage.topUp();
+     */
 
     }
 
@@ -158,7 +256,7 @@ detailsPage
 
 
 
-   @Test(dependsOnMethods = "nolTagIDPage")
+  /*  @Test(dependsOnMethods = "nolTagIDPage")
     public void paymentPage() {
        // paymentPage.acceptTerms();
        // paymentPage.clickPaySummary();
@@ -167,6 +265,8 @@ detailsPage
        // paymentPage.enterCardDetails("4111111111111111", "12", "27", "123");
        // paymentPage.confirmPay();
     }
+
+   */
 
 
    /*  @Test(dependsOnMethods = "paymentPage")
@@ -324,7 +424,6 @@ detailsPage
  */
 
 
-}
 
 
 // //  صفحه الكولات
@@ -337,7 +436,8 @@ detailsPage
 // appium need (cloud)
 
 
-//  Maven + POM + TestNG best practice لمشروع Appium with Selenium //
+//  Maven + POM + TestNG best practice لمشروع Appium with Selenium  //
+//  We are using Appium with TestNG and Page Object Model framework //
 
 // 1- Technical vehicle statues report service // As A Login
 // 2- Book inspection appointment service // As A Login
@@ -347,6 +447,8 @@ detailsPage
 // 6- Madinati Service// As A Login & As A Guest
 // 7- Top Up Parking Account Service// As A Login
 // 8- RTA Location Service// As A Login & As A Guest
+// 9- Recharge Salik Service// As A Login & As A Guest
+
 
 
 
