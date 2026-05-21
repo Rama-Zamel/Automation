@@ -30,16 +30,12 @@ public class RunWebApplicationTest {
     private MadinatiServicePage madinatiServicePage;
     private MorePage morePage;
     private RTALocationsPage rtalocationsPage;
-    private RechargeSalikPage  rechargeSalikPage;
-
+    private RechargeSalikPage rechargeSalikPage;
 
     @BeforeSuite
     public void clearScreenshots() {
-
         File folder = new File("screenshots");
-
         if (folder.exists()) {
-
             for (File file : folder.listFiles()) {
                 file.delete();
             }
@@ -49,22 +45,18 @@ public class RunWebApplicationTest {
     }
 
     public void takeScreenshot(String fileName) throws Exception {
+        File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 
-        File src = ((TakesScreenshot) driver)
-                .getScreenshotAs(OutputType.FILE);
-
-        File screen = new File(
-                "screenshots/" + fileName + ".png"
-        );
+        File screen = new File("screenshots/" + fileName + ".png");
 
         FileHandler.copy(src, screen);
 
-        System.out.println("Screenshot taken: "
-                + screen.getAbsolutePath());
+        System.out.println("Screenshot taken: " + screen.getAbsolutePath());
     }
 
     @BeforeClass
     public void setUp() throws Exception {
+
         UiAutomator2Options options = new UiAutomator2Options()
                 .setPlatformName("Android")
                 .setAutomationName("UiAutomator2")
@@ -95,6 +87,197 @@ public class RunWebApplicationTest {
     }
 
     @Test
+    public void LoginFlow() {
+        try {
+            loginPage.clickAllowBtn();
+        } catch (Exception ignored) {}
+
+        try {
+            loginPage.clickSkip();
+        } catch (Exception ignored) {}
+
+        try {
+            loginPage.selectUAEResident();
+        } catch (Exception ignored) {}
+
+        try {
+            loginPage.clickProceed();
+        } catch (Exception ignored) {}
+
+        loginPage.clickLogin();
+        loginPage.enterUsername("Tariqj86");
+        loginPage.enterPassword("Test@1986");
+        loginPage.clickLoginButton();
+    }
+
+    @Test(priority = 1)
+    public void GuestFlow() {
+        try {
+            loginPage.clickAllowBtn();
+        } catch (Exception ignored) {}
+
+        try {
+            loginPage.clickSkip();
+        } catch (Exception ignored) {}
+
+        try {
+            loginPage.selectUAEResident();
+        } catch (Exception ignored) {}
+
+        try {
+            loginPage.clickProceed();
+        } catch (Exception ignored) {}
+
+        loginPage.clickLogin();
+        loginPage.clickGuestButton();
+    }
+
+    @Test
+    public void VehicleTSReportFlow() {
+        servicesPage.clickService();
+        servicesPage.clickVehicleLicensing();
+        servicesPage.clickVehicleTSReport();
+        vehicleSelectionPage.selectRegisteredVehicle();
+        vehicleSelectionPage.clickContinue();
+        detailsPage.clickSelectLanguage();
+        detailsPage.chooseEnglishLanguage();
+        detailsPage.clickContinue2();
+    }
+
+    @Test
+    public void VehicleInspectionFlow() {
+        servicesPage.clickService();
+        servicesPage.clickVehicleLicensing();
+        servicesPage.clickVehicleInstAppointment();
+        servicesPage.clickBookAppointment();
+
+        vehicleSelectionPage.selectRegisteredVehicle();
+        vehicleSelectionPage.clickContinue();
+
+        inspectionTypePage.serviceTypeInstDropDown();
+        inspectionTypePage.chooseServiceTypeInstDropDown("Registration Test");
+        inspectionTypePage.clickContinue();
+
+        inspectionCenterPage.searchInspectionCenter("Wasel Al Jaddaf");
+        inspectionCenterPage.selectInspectionCenter();
+
+        inspectionSchedulePage.inspectionDateDropDown();
+        inspectionSchedulePage.chooseInspectionDateDropDown("02-03-2026");
+        inspectionSchedulePage.inspectionTimeDropDown();
+        inspectionSchedulePage.chooseInspectionTimeDropDown("07:00 AM - 07:10 AM");
+        inspectionSchedulePage.clickContinue();
+
+        detailsPage.clickContinue2();
+    }
+
+    @Test
+    public void TopUpParkingAccountFlow() {
+        servicesPage.clickService();
+        servicesPage.clickParking();
+        servicesPage.clickTopUpParking();
+        nolTagIDPage.selectAmount();
+    }
+
+    @Test
+    public void NolTopUpFlow() {
+        servicesPage.clickService();
+        servicesPage.clickNOL();
+        servicesPage.clickNolTopUp();
+        nolTagIDPage.nolTagID("0361532922");
+        nolTagIDPage.selectAmount();
+
+        try {
+            nolTagIDPage.emailAddress("e@gmail.com");  // just as Guest
+        } catch (Exception ignored) {}
+
+        nolTagIDPage.topUp();
+    }
+
+    @Test
+    public void NolBalanceFlow() {
+        servicesPage.clickService();
+        servicesPage.clickNOL();
+        servicesPage.clickNolBalance();
+        nolTagIDPage.nolTagID("0361532922");
+        nolTagIDPage.cardInfo();
+        nolTagIDPage.topUp();
+        nolTagIDPage.selectAmount();
+        nolTagIDPage.topUp();
+    }
+
+    @Test
+    public void MadinatiFlow() {
+        madinatiServicePage.madinatiService();
+        madinatiServicePage.MadinatiMap();
+    }
+
+    @Test
+    public void RTALocationsFlow() {
+        morePage.ClickMore();
+        morePage.ClickRTALocations();
+        rtalocationsPage.RTALocationsWithScroll();
+    }
+
+    @Test
+    public void LogoutFlow() {
+        morePage.ClickMore();
+        morePage.ClickLogout();
+    }
+
+    @Test(priority = 2)
+    public void RechargeMySalikFlow() {
+        servicesPage.clickService();
+        servicesPage.clickSalik();
+        servicesPage.clickRechargeMySalik();
+        rechargeSalikPage.ClickMobileNumber("525285659");
+        rechargeSalikPage.ClickCountry();
+        rechargeSalikPage.SelectCountryDropDown("United Arab Emirates");
+        rechargeSalikPage.ClickEmirate();
+        rechargeSalikPage.SelectEmirateDropDown("Dubai");
+        rechargeSalikPage.ClickCategory();
+        rechargeSalikPage.SelectCategoryDropDown("Private");
+        rechargeSalikPage.ClickPlateCode();
+        rechargeSalikPage.SelectPlateDropDown("J");
+        rechargeSalikPage.ClickPlateNumber("96407");
+        rechargeSalikPage.SelectAmount();
+        rechargeSalikPage.RechargeNow();
+    }
+
+    @Test
+    public void RechargeAnotherSalikFlow() {
+        servicesPage.clickService();
+        servicesPage.clickSalik();
+        servicesPage.clickRechargeAnotherSalik();
+        rechargeSalikPage.SelectAmount();
+        rechargeSalikPage.RechargeNow();
+    }
+
+    @Test
+    public void WithoutPaymentFlow() {
+        confirmationPage.clickDone();
+    }
+
+    @Test(priority = 3)
+    public void WithPaymentFlow() {
+        try {
+            paymentPage.acceptTerms();
+        } catch (Exception ignored) {}
+
+        paymentPage.clickPaySummary();
+        paymentPage.clickPayMethod();
+        paymentPage.selectMethod();
+        paymentPage.enterCardDetails("4111111111111111", "12", "27", "123");
+        paymentPage.confirmPay();
+        confirmationPage.clickDone();
+    }
+
+
+
+
+
+
+
+   /* 1- @Test
     public void loginPage() throws Exception {
         loginPage.clickAllowBtn();
         takeScreenshot("AllowBtn");
@@ -170,6 +353,8 @@ public class RunWebApplicationTest {
         // paymentPage.confirmPay();
     }
 
+
+    */
 
    /*  @Test(dependsOnMethods = "loginPage")
     public void madinatiServicePage() {
@@ -297,8 +482,7 @@ detailsPage
 
 
 
-
-/*    public void completeFlowLoginService() {
+/*   2- public void completeFlowLoginService() {
 
         loginPage.clickAllowBtn();
         loginPage.clickSkip();
@@ -422,6 +606,10 @@ detailsPage
     }
 
  */
+
+
+
+
 
 
 
