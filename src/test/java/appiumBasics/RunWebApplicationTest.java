@@ -639,6 +639,7 @@ detailsPage
 
 
 
+// Selenium (كل الكود) + Appium (الجزء من الكود ربط الموبايل بالاب) + TestNG (@BEFORE).+ POM (تقسيم وترتيب المشروع)
 
 
 
